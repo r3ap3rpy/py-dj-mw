@@ -1,0 +1,24 @@
+name: Publish to PyPI
+
+on:
+  release:
+    branches:
+     - main
+    types: [published]
+
+jobs:
+  PyPI-Release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source
+      uses: action/checkout@v3
+    - name: Build Package
+      run: |
+        python3 -m pip install --upgrade pip build
+        python3 -m build
+    - name: Publish to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secret.TESTPYPI_API_TOKEN }}
+        repository_url: http://test.pypi.org/legacy/
