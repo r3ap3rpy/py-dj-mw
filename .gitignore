@@ -2,3 +2,5 @@ venv/*
 .pytest_cache
 **__pycache__/
 db.sqlite3
+dist/
+dani_sql_tools.egg-info/
